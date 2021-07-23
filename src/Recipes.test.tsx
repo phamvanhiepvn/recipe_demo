@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { createMemoryHistory } from 'history';
-import RecipesList from './features/recipes';
+import RecipesPage from './features/recipes';
 import { Router } from 'react-router-dom';
 
 test('Check page recipes has text', () => {
@@ -11,7 +11,7 @@ test('Check page recipes has text', () => {
   const { getByText } = render(
     <Provider store={store}>
       <Router history={history}>
-        <RecipesList />
+        <RecipesPage />
       </Router>
     </Provider>
   );
