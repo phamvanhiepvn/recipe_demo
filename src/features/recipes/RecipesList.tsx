@@ -3,39 +3,44 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useRecipes from '../../hooks/useRecipes';
-import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Loader from '../../components/Loader';
 import { getDocumentScreen } from '../../helpers/screen';
-import { Paper } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
+import { Paper, withStyles } from '@material-ui/core';
+const GridRoot = withStyles({
   root: {
     flexGrow: 1,
     backgroundColor: '#F0F0F0',
   },
-  card: {
+})(Grid);
+const PaperRoot = withStyles({
+  root: {
     backgroundColor: '#FFFFF',
     borderRadius: 0,
   },
-  media: {
+})(Paper);
+const CardMediaRoot = withStyles({
+  root: {
     height: 250,
   },
-  content: {
+})(CardMedia);
+const CardContentRoot = withStyles({
+  root: {
     height: 50,
     textTransform: 'uppercase',
   },
-  title: {
+})(CardContent);
+const TypographyTitle = withStyles({
+  root: {
     fontWeight: 500,
     fontSize: '1rem',
   },
-}));
+})(Typography);
 
 const RecipesList = () => {
   const { loading, list, getList } = useRecipes();
-  const classes = useStyles();
   const [documentWidth, setDocumentWidth] = useState('landscapewidedesktop3x');
 
   const _getDocumentScreen = () => {
@@ -55,31 +60,28 @@ const RecipesList = () => {
           {loading ? (
             <Loader />
           ) : (
-            <Grid container className={classes.root} spacing={3}>
+            <GridRoot container spacing={3}>
               {list?.length > 0 ? (
                 <>
                   {list.map((recipes: any) => (
                     <Grid item xs={12} sm={4} key={recipes.contentId}>
-                      <Paper className={classes.card} variant="outlined">
+                      <PaperRoot variant="outlined">
                         <CardActionArea>
-                          <CardMedia
-                            className={classes.media}
+                          <CardMediaRoot
                             image={recipes.imageList[documentWidth].url}
                             title={recipes.title}
                           />
-                          <CardContent className={classes.content}>
-                            <Typography
+                          <CardContentRoot>
+                            <TypographyTitle
                               gutterBottom
                               variant="h6"
-                              component="h6"
                               align="center"
-                              className={classes.title}
                             >
                               {recipes.title}
-                            </Typography>
-                          </CardContent>
+                            </TypographyTitle>
+                          </CardContentRoot>
                         </CardActionArea>
-                      </Paper>
+                      </PaperRoot>
                     </Grid>
                   ))}
                 </>
@@ -88,7 +90,7 @@ const RecipesList = () => {
                   No Recipes found
                 </Typography>
               )}
-            </Grid>
+            </GridRoot>
           )}
         </Box>
       </Grid>

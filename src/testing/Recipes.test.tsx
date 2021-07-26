@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from './store/store';
+import { store } from '../store/store';
 import { createMemoryHistory } from 'history';
-import RecipesPage from './features/recipes';
+import RecipesPage from '../features/recipes';
 import { Router } from 'react-router-dom';
 
 test('Check page recipes has text', () => {
