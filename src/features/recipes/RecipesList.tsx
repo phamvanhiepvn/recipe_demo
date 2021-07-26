@@ -53,6 +53,14 @@ const RecipesList = () => {
     getList();
   }, []);
 
+  const getImageRecipes = (recipes: any) => {
+    return recipes.imageList &&
+      recipes.imageList[documentWidth] &&
+      recipes.imageList[documentWidth].url
+      ? recipes.imageList[documentWidth].url
+      : ``;
+  };
+
   return (
     <Box>
       <Grid item xs={12} style={{ maxWidth: '100%' }}>
@@ -68,7 +76,7 @@ const RecipesList = () => {
                       <PaperRoot variant="outlined">
                         <CardActionArea>
                           <CardMediaRoot
-                            image={recipes.imageList[documentWidth].url}
+                            image={getImageRecipes(recipes)}
                             title={recipes.title}
                           />
                           <CardContentRoot>
